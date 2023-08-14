@@ -1,9 +1,6 @@
 package com.web.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.web.common.CommonView;
+import com.web.service.UserInfoService;
+import com.web.service.impl.UserInfoServiceImpl;
 
 
 
@@ -19,18 +19,13 @@ import com.google.gson.Gson;
 public class UserInfoServlet extends HttpServlet { // HttpServlet를 상속받아서 UserInfoServlet로 불릴 수 있음.
 	private static final long serialVersionUID = 1L; 
     private Gson gson = new Gson();
+    private UserInfoService uiService = new UserInfoServiceImpl();
  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		String cmd = CommonView.getCmd(request);
+		String json = "";
 		response.setContentType("application/json;charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		List<String> list = new ArrayList<>();
-		list.add("번호1");
-		list.add("번호2");
-		list.add("번호3");
 		
-		String json = gson.toJson(list);
-		out.print(json);
 	}
 
 	
